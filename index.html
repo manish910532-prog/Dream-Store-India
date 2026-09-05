@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <title>Dream Store India | Luxury Fashion & Lifestyle</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Cinzel:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b1118;
+      --card-bg: #141e28;
+      --gold: #d4af37;
+      --gold-light: #f5d77f;
+      --gold-glow: rgba(212, 175, 55, 0.35);
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --green: #10b981;
+      --border: rgba(212, 175, 55, 0.25);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { background: var(--bg); color: var(--text); padding-bottom: 90px; }
+
+    /* TOP ANNOUNCEMENT STRIP */
+    .top-strip { background: linear-gradient(90deg, #b8860b, #e5c158, #b8860b); color: #000; font-size: 11px; font-weight: 800; text-align: center; padding: 6px; text-transform: uppercase; letter-spacing: 1px; }
+
+    /* LUXURY HEADER */
+    header { background: #070b10; border-bottom: 1px solid var(--border); padding: 14px 28px; position: sticky; top: 0; z-index: 1000; }
+    .header-inner { max-width: 1240px; margin: auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    
+    .brand-col { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .brand-emblem { font-family: 'Cinzel', serif; font-size: 26px; font-weight: 900; color: var(--gold); }
+    .brand-name { font-size: 18px; font-weight: 800; color: #fff; letter-spacing: 0.5px; }
+
+    .search-box { flex-grow: 1; max-width: 500px; position: relative; }
+    .search-box input { width: 100%; padding: 10px 42px 10px 18px; border-radius: 99px; background: #141e28; border: 1px solid var(--border); color: #fff; font-size: 13px; outline: none; }
+    .search-icon { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: var(--gold); font-size: 14px; }
+
+    .nav-actions { display: flex; align-items: center; gap: 18px; }
+    .login-btn-pill { background: linear-gradient(135deg, #c5a059, #b8860b); color: #000; border: none; padding: 8px 24px; font-weight: 800; border-radius: 99px; font-size: 13px; cursor: pointer; }
+
+    /* DYNAMIC USER MENU */
+    .user-menu-wrap { position: relative; display: none; }
+    .user-pill { background: #141e28; border: 1px solid var(--gold); color: var(--gold-light); padding: 7px 18px; border-radius: 99px; font-size: 13px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+    .user-dropdown { display: none; position: absolute; top: 100%; right: 0; background: #141e28; border: 1px solid var(--gold); border-radius: 10px; width: 200px; margin-top: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); z-index: 1001; }
+    .user-menu-wrap:hover .user-dropdown { display: block; }
+    .user-dropdown a { display: flex; align-items: center; gap: 10px; padding: 12px 16px; color: #fff; text-decoration: none; font-size: 13px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .user-dropdown a:hover { background: #1e2c3a; color: var(--gold-light); }
+
+    .hub-link { color: var(--gold-light); text-decoration: none; font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 6px; }
+
+    /* CATEGORY NAV */
+    .cat-bar { background: #101720; border-bottom: 1px solid rgba(255,255,255,0.06); padding: 10px 0; }
+    .cat-inner { max-width: 1240px; margin: auto; display: flex; gap: 12px; padding: 0 16px; overflow-x: auto; }
+    .cat-pill { background: #141e28; color: var(--muted); border: 1px solid rgba(255,255,255,0.08); padding: 6px 18px; border-radius: 99px; font-size: 12px; font-weight: 700; cursor: pointer; white-space: nowrap; }
+    .cat-pill.active { background: var(--gold); color: #000; border-color: var(--gold); }
+
+    .main-wrap { max-width: 1240px; margin: 24px auto; padding: 0 16px; }
+
+    /* PRODUCT CARDS */
+    .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
+    .p-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s; position: relative; }
+    .p-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+    .p-badge { position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.85); border: 1px solid var(--gold); color: var(--gold-light); font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 4px; z-index: 2; }
+    .p-media { width: 100%; height: 230px; background: #070b10; overflow: hidden; }
+    .p-media img { width: 100%; height: 100%; object-fit: cover; }
+    .p-details { padding: 16px; display: flex; flex-direction: column; flex-grow: 1; }
+    .p-rating { color: #fbbf24; font-size: 12px; font-weight: 700; margin-bottom: 6px; }
+    .p-title { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .p-price-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 14px; }
+    .final-price { font-size: 20px; font-weight: 800; color: var(--green); }
+    .cut-price { font-size: 13px; color: var(--muted); text-decoration: line-through; }
+    .off-tag { font-size: 11px; font-weight: 800; color: var(--gold); }
+    .buy-action-btn { background: linear-gradient(135deg, #c5a059, #b8860b); color: #000; border: none; padding: 10px; border-radius: 8px; font-weight: 800; font-size: 13px; cursor: pointer; text-align: center; }
+
+    /* =========================================================
+       DREAM STORE SPLIT AUTH MODAL (FLIPKART ARCHITECTURE + DSI LOOK)
+       ========================================================= */
+    #authOverlay { display: none; position: fixed; inset: 0; background: rgba(7,11,16,0.94); backdrop-filter: blur(10px); z-index: 9999; align-items: center; justify-content: center; padding: 16px; }
+    .auth-box { display: flex; width: 760px; min-height: 480px; background: #141e28; border: 1.5px solid var(--gold); border-radius: 18px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 35px var(--gold-glow); position: relative; }
+    .auth-left { width: 40%; background: linear-gradient(135deg, #101720, #070b10); border-right: 1px solid var(--border); padding: 40px 28px; display: flex; flex-direction: column; justify-content: space-between; }
+    .auth-left-title { font-family: 'Cinzel', serif; font-size: 24px; font-weight: 900; color: var(--gold); margin-bottom: 10px; }
+    .auth-left-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .auth-right { width: 60%; padding: 44px 36px; position: relative; }
+    .close-btn { position: absolute; right: 18px; top: 14px; background: none; border: none; color: #fff; font-size: 22px; cursor: pointer; }
+
+    .input-group { margin-bottom: 22px; }
+    .auth-input { width: 100%; background: #0b1118; border: 1px solid var(--border); padding: 12px 14px; border-radius: 8px; color: #fff; font-size: 14px; outline: none; }
+    .auth-input:focus { border-color: var(--gold); }
+    .auth-btn { width: 100%; background: linear-gradient(135deg, #c5a059, #b8860b); color: #000; border: none; padding: 13px; border-radius: 8px; font-weight: 800; font-size: 14px; cursor: pointer; }
+
+    /* 6-DIGIT OTP BOXES (DSI STYLE) */
+    .otp-grid { display: flex; justify-content: space-between; gap: 8px; margin: 20px 0; }
+    .otp-box { width: 44px; height: 50px; background: #0b1118; border: 1px solid var(--gold); border-radius: 8px; color: #fff; font-size: 22px; font-weight: 800; text-align: center; outline: none; }
+
+    /* PROFILE & ORDERS PANELS */
+    #profilePanel, #ordersPanel { display: none; background: #141e28; border: 1px solid var(--border); border-radius: 14px; padding: 28px; }
+    .profile-split { display: grid; grid-template-columns: 260px 1fr; gap: 28px; }
+    .profile-nav-btn { display: block; width: 100%; padding: 12px 16px; background: #0b1118; border: 1px solid var(--border); color: #fff; border-radius: 8px; margin-bottom: 8px; text-align: left; font-weight: 700; cursor: pointer; }
+    .profile-nav-btn.active { background: var(--gold); color: #000; border-color: var(--gold); }
+
+    .order-item-card { background: #0b1118; border: 1px solid var(--border); border-radius: 10px; padding: 16px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
+  </style>
+</head>
+<body>
+
+  <div class="top-strip">⚡ Dream Store India | Express Delivery Across All Pincodes | Verified Merchant Outlet</div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <a href="/" class="brand-col" onclick="showCatalog(event)">
+        <span class="brand-emblem">DSI</span>
+        <span class="brand-name">Dream Store India</span>
+      </a>
+
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search premium footwear, kurtas, jackets..." onkeyup="filterItems()">
+        <span class="search-icon">🔍</span>
+      </div>
+
+      <div class="nav-actions">
+        <div id="unauthBtn">
+          <button class="login-btn-pill" onclick="openAuthModal()">Login / Sign Up</button>
+        </div>
+
+        <div id="authMenu" class="user-menu-wrap">
+          <div class="user-pill">👤 <span id="userNameText">MANISH</span> ▾</div>
+          <div class="user-dropdown">
+            <a href="#profile" onclick="openProfile(event)">👤 My Profile</a>
+            <a href="#orders" onclick="openOrders(event)">📦 My Orders</a>
+            <a href="#" onclick="logout(event)" style="color:#ef4444;">🚪 Sign Out</a>
+          </div>
+        </div>
+
+        <a href="#orders" class="hub-link" onclick="openOrders(event)">📦 Orders</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- CATEGORY FILTER STRIP -->
+  <div class="cat-bar">
+    <div class="cat-inner">
+      <div class="cat-pill active" onclick="setCategory('All', this)">All Collections</div>
+      <div class="cat-pill" onclick="setCategory('Footwear', this)">Footwear</div>
+      <div class="cat-pill" onclick="setCategory('Fashion', this)">Fashion & Wear</div>
+      <div class="cat-pill" onclick="setCategory('Electronics', this)">Electronics</div>
+    </div>
+  </div>
+
+  <div class="main-wrap">
+
+    <!-- 1. CATALOG SHOWROOM -->
+    <div id="catalogPanel">
+      <div class="product-grid" id="productGrid"></div>
+    </div>
+
+    <!-- 2. CUSTOMER PROFILE PAGE -->
+    <div id="profilePanel">
+      <div class="profile-split">
+        <div>
+          <button class="profile-nav-btn active">👤 Personal Information</button>
+          <button class="profile-nav-btn" onclick="openOrders(event)">📦 Orders History</button>
+          <button class="profile-nav-btn" onclick="logout(event)" style="color:#ef4444;">🚪 Logout</button>
+        </div>
+
+        <div>
+          <h2 style="font-size:18px; color:var(--gold-light); margin-bottom:20px;">Account Information</h2>
+          <div style="display:flex; gap:14px; margin-bottom:14px;">
+            <input type="text" id="pFirst" class="auth-input" placeholder="First Name">
+            <input type="text" id="pLast" class="auth-input" placeholder="Last Name">
+          </div>
+          <div class="input-group">
+            <input type="email" id="pEmail" class="auth-input" placeholder="Email Address">
+          </div>
+          <div class="input-group">
+            <input type="tel" id="pPhone" class="auth-input" readonly style="opacity:0.7;">
+          </div>
+          <button class="auth-btn" style="max-width:180px;" onclick="saveProfile()">Save Updates</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. ORDERS TRACKING PAGE -->
+    <div id="ordersPanel">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+        <h2 style="font-size:18px; color:var(--gold-light);">My Orders History</h2>
+        <button class="login-btn-pill" onclick="showCatalog(event)">⬅ Continue Shopping</button>
+      </div>
+      <div id="orderItemsContainer"></div>
+    </div>
+
+  </div>
+
+  <!-- LUXURY SPLIT AUTH MODAL -->
+  <div id="authOverlay">
+    <div class="auth-box">
+      <div class="auth-left">
+        <div>
+          <div class="auth-left-title">DREAM STORE</div>
+          <p class="auth-left-desc">Sign in to track orders, manage deliveries and access exclusive member deals.</p>
+        </div>
+        <div style="font-size:11px; color:var(--gold-light); font-weight:700;">✦ 100% Verified Buyer Protection</div>
+      </div>
+
+      <div class="auth-right">
+        <button class="close-btn" onclick="closeAuthModal()">✕</button>
+
+        <!-- Step 1: Mobile Entry -->
+        <div id="authStageMobile">
+          <h3 style="font-size:16px; margin-bottom:6px;">Enter Mobile Number</h3>
+          <p style="font-size:12px; color:var(--muted); margin-bottom:20px;">We'll send an official verification code via SMS.</p>
+          <div class="input-group">
+            <input type="tel" id="inputMobile" class="auth-input" maxlength="10" placeholder="10-digit mobile number" value="9105324847">
+          </div>
+          <button class="auth-btn" onclick="requestOtp()">Send OTP via SMS ➔</button>
+        </div>
+
+        <!-- Step 2: 6-Box OTP -->
+        <div id="authStageOtp" style="display:none;">
+          <h3 style="font-size:16px; margin-bottom:6px;">Verify Security Code</h3>
+          <p style="font-size:12px; color:var(--muted);">Sent to <b id="displayTargetPhone" style="color:#fff;"></b></p>
+          <div style="font-size:12px; color:var(--gold-light); cursor:pointer; margin-top:4px;" onclick="switchAuthStage(1)">Change Mobile?</div>
+
+          <div class="otp-grid">
+            <input type="text" class="otp-box" maxlength="1" oninput="focusNext(this, 1)">
+            <input type="text" class="otp-box" maxlength="1" oninput="focusNext(this, 2)">
+            <input type="text" class="otp-box" maxlength="1" oninput="focusNext(this, 3)">
+            <input type="text" class="otp-box" maxlength="1" oninput="focusNext(this, 4)">
+            <input type="text" class="otp-box" maxlength="1" oninput="focusNext(this, 5)">
+            <input type="text" class="otp-box" maxlength="1" oninput="focusNext(this, 6)">
+          </div>
+
+          <button class="auth-btn" onclick="submitOtp()">Verify & Sign In ➔</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let products = [];
+    let currentCat = 'All';
+
+    window.addEventListener('load', () => {
+      fetchCatalog();
+      verifySession();
+    });
+
+    async function fetchCatalog() {
+      const res = await fetch('/api/products');
+      products = await res.json();
+      renderCatalog();
+    }
+
+    function renderCatalog() {
+      const q = document.getElementById('searchInput').value.toLowerCase();
+      const grid = document.getElementById('productGrid');
+
+      const filtered = products.filter(p => {
+        const matchC = currentCat === 'All' || p.category === currentCat;
+        const matchQ = p.name.toLowerCase().includes(q);
+        return matchC && matchQ;
+      });
+
+      grid.innerHTML = filtered.map(p => {
+        const off = Math.round(((p.cutPrice - p.price) / p.cutPrice) * 100);
+        return `
+          <div class="p-card">
+            <span class="p-badge">${p.tag || 'Special'}</span>
+            <div class="p-media"><img src="${p.img}" alt="${p.name}"></div>
+            <div class="p-details">
+              <div class="p-rating">★ ${p.rating} (${p.reviews})</div>
+              <div class="p-title">${p.name}</div>
+              <div class="p-price-row">
+                <span class="final-price">₹${p.price}</span>
+                <span class="cut-price">₹${p.cutPrice}</span>
+                <span class="off-tag">${off}% OFF</span>
+              </div>
+              <button class="buy-action-btn" onclick="directBuy('${p.name}', ${p.price})">Order via UPI / WA</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function setCategory(cat, el) {
+      currentCat = cat;
+      document.querySelectorAll('.cat-pill').forEach(c => c.classList.remove('active'));
+      el.classList.add('active');
+      showCatalog();
+      renderCatalog();
+    }
+
+    function filterItems() { renderCatalog(); }
+
+    // AUTH FUNCTIONS
+    function verifySession() {
+      const session = localStorage.getItem('dsi_user_session');
+      if (session) {
+        const u = JSON.parse(session);
+        document.getElementById('unauthBtn').style.display = 'none';
+        document.getElementById('authMenu').style.display = 'inline-block';
+        document.getElementById('userNameText').innerText = u.firstName.toUpperCase();
+        document.getElementById('pFirst').value = u.firstName;
+        document.getElementById('pLast').value = u.lastName;
+        document.getElementById('pEmail').value = u.email;
+        document.getElementById('pPhone').value = u.mobile;
+      } else {
+        document.getElementById('unauthBtn').style.display = 'block';
+        document.getElementById('authMenu').style.display = 'none';
+      }
+    }
+
+    function openAuthModal() { document.getElementById('authOverlay').style.display = 'flex'; }
+    function closeAuthModal() { document.getElementById('authOverlay').style.display = 'none'; }
+
+    function switchAuthStage(st) {
+      document.getElementById('authStageMobile').style.display = st === 1 ? 'block' : 'none';
+      document.getElementById('authStageOtp').style.display = st === 2 ? 'block' : 'none';
+    }
+
+    let activePhone = '';
+    async function requestOtp() {
+      const mobile = document.getElementById('inputMobile').value.trim();
+      if (mobile.length !== 10) return alert('Kripya valid 10-digit mobile number enter karein');
+
+      activePhone = mobile;
+      document.getElementById('displayTargetPhone').innerText = '+91-' + mobile;
+
+      const res = await fetch('/api/auth/send-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ mobile })
+      });
+      const data = await res.json();
+      if (data.success) {
+        switchAuthStage(2);
+        const digits = data.directCode.split('');
+        document.querySelectorAll('.otp-box').forEach((b, i) => b.value = digits[i] || '');
+      }
+    }
+
+    function focusNext(el, idx) {
+      if (el.value && idx < 6) document.querySelectorAll('.otp-box')[idx].focus();
+    }
+
+    async function submitOtp() {
+      let code = '';
+      document.querySelectorAll('.otp-box').forEach(b => code += b.value);
+
+      const res = await fetch('/api/auth/verify-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ mobile: activePhone, otp: code })
+      });
+      const data = await res.json();
+      if (data.success) {
+        localStorage.setItem('dsi_user_session', JSON.stringify(data.user));
+        closeAuthModal();
+        verifySession();
+      } else {
+        alert(data.message);
+      }
+    }
+
+    function logout(e) {
+      if(e) e.preventDefault();
+      localStorage.removeItem('dsi_user_session');
+      verifySession();
+      showCatalog();
+    }
+
+    // VIEW MANAGEMENT
+    function showCatalog(e) {
+      if(e) e.preventDefault();
+      document.getElementById('catalogPanel').style.display = 'block';
+      document.getElementById('profilePanel').style.display = 'none';
+      document.getElementById('ordersPanel').style.display = 'none';
+    }
+
+    function openProfile(e) {
+      if(e) e.preventDefault();
+      document.getElementById('catalogPanel').style.display = 'none';
+      document.getElementById('profilePanel').style.display = 'block';
+      document.getElementById('ordersPanel').style.display = 'none';
+    }
+
+    async function openOrders(e) {
+      if(e) e.preventDefault();
+      document.getElementById('catalogPanel').style.display = 'none';
+      document.getElementById('profilePanel').style.display = 'none';
+      document.getElementById('ordersPanel').style.display = 'block';
+
+      const res = await fetch('/api/orders');
+      const orders = await res.json();
+      const container = document.getElementById('orderItemsContainer');
+      container.innerHTML = orders.map(o => `
+        <div class="order-item-card">
+          <div style="display:flex; align-items:center; gap:16px;">
+            <img src="${o.img}" style="width:60px; height:60px; object-fit:cover; border-radius:6px;" alt="Order">
+            <div>
+              <div style="font-weight:700;">${o.item}</div>
+              <div style="font-size:12px; color:var(--muted);">Tracking ID: ${o.id}</div>
+              <div style="font-size:12px; color:var(--gold-light);">Destination: ${o.address}</div>
+            </div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:16px; font-weight:800; color:var(--green);">₹${o.price}</div>
+            <div style="font-size:12px; font-weight:700; color:#10b981;">● ${o.status}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    async function saveProfile() {
+      const u = {
+        firstName: document.getElementById('pFirst').value,
+        lastName: document.getElementById('pLast').value,
+        email: document.getElementById('pEmail').value,
+        mobile: document.getElementById('pPhone').value
+      };
+      await fetch('/api/profile/update', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(u)
+      });
+      localStorage.setItem('dsi_user_session', JSON.stringify(u));
+      verifySession();
+      alert('Profile details updated successfully!');
+    }
+
+    function directBuy(name, price) {
+      const text = `Hi Dream Store India, I want to order:\nItem: ${name}\nAmount: ₹${price}\nPlease confirm dispatch details.`;
+      window.open('https://wa.me/919105324847?text=' + encodeURIComponent(text), '_blank');
+    }
+  </script>
+</body>
+</html>

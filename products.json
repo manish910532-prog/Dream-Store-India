@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Red Sneaker",
+    "price": 799,
+    "cutPrice": 1499,
+    "img": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600"
+  },
+  {
+    "id": 2,
+    "name": "Cotton Kurta Pajama",
+    "price": 999,
+    "cutPrice": 1999,
+    "img": "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=600"
+  },
+  {
+    "id": 3,
+    "name": "Formal Leather Shoes",
+    "price": 1299,
+    "cutPrice": 2499,
+    "img": "https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?w=600"
+  }
+]

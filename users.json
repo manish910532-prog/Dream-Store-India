@@ -7,3 +7,59 @@
     "gender": "Male"
   }
 }
+[
+  {
+    "id": "1",
+    "name": "Luxury Red Sneakers",
+    "category": "Footwear",
+    "price": "₹799",
+    "original": "₹1,999",
+    "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80",
+    "description": "Breathable mesh lightweight casual red sneakers with cushioned sole."
+  },
+  {
+    "id": "2",
+    "name": "Pure Cotton Kurta Pajama",
+    "category": "Ethnic Wear",
+    "price": "₹999",
+    "original": "₹2,499",
+    "image": "https://images.unsplash.com/photo-1598033129183-c4f50c736f10?w=600&q=80",
+    "description": "Handcrafted ethnic regular fit royal white cotton kurta."
+  },
+  {
+    "id": "3",
+    "name": "Formal Leather Derby Shoes",
+    "category": "Footwear",
+    "price": "₹1,299",
+    "original": "₹3,499",
+    "image": "https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?w=600&q=80",
+    "description": "Genuine burnished black leather formal corporate derby shoes."
+  },
+  {
+    "id": "4",
+    "name": "Classic Gold Accent Chrono Watch",
+    "category": "Accessories",
+    "price": "₹1,499",
+    "original": "₹4,999",
+    "image": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=600&q=80",
+    "description": "Luxury gold-toned stainless steel dial with quartz movement."
+  },
+  {
+    "id": "5",
+    "name": "Slim Fit Oxford Formal Shirt",
+    "category": "Clothing",
+    "price": "₹699",
+    "original": "₹1,799",
+    "image": "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=600&q=80",
+    "description": "Premium breathable 100% cotton solid regular collar shirt."
+  },
+  {
+    "id": "6",
+    "name": "Royal Matte Stainless Bracelet",
+    "category": "Accessories",
+    "price": "₹499",
+    "original": "₹1,299",
+    "image": "https://images.unsplash.com/photo-1611591475166-2679262145b0?w=600&q=80",
+    "description": "Anti-tarnish luxury steel curb chain wrist bracelet."
+  }
+]
